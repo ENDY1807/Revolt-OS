@@ -16,10 +16,10 @@ upower
 bluez
 bluez-tools
 network-manager
-network-manager-gnome
+network-manager-applet
+nm-connection-editor
 wpasupplicant
 rfkill
 acpi
 acpid
 lm-sensors
-

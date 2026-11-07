@@ -23,8 +23,7 @@ xdg-utils
 fonts-font-awesome
 fonts-noto
 papirus-icon-theme
-breeze-cursor-theme
 libpam-systemd
-polkit-kde-agent-1
+lxpolkit
 playerctl
 brightnessctl

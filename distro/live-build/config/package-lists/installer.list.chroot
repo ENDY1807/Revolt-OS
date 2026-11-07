@@ -1,9 +1,7 @@
 # RevoltOS Live System & Installer Packages
 calamares
-calamares-settings-debian
 live-boot
 live-config
 live-config-systemd
 parted
 gparted
-
