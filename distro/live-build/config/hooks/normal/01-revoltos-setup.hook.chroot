@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 echo "[RevoltOS] Running post-install chroot configuration hook..."
@@ -8,25 +8,104 @@ echo "revoltos" > /etc/hostname
 
 # Configure PAM & default locale
 if [ -f /etc/locale.gen ]; then
-    sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+    sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
     locale-gen || true
 fi
+echo 'LANG=en_US.UTF-8' > /etc/default/locale
 
 # Set default shell to bash
 useradd -D -s /bin/bash
 
-# Ensure live user configuration is present
-if id "user" >/dev/null 2>&1; then
-    usermod -l revolt user || true
-    groupmod -n revolt user || true
-    usermod -d /home/revolt -m revolt || true
+# Create necessary groups
+for grp in revoltos-user seat autologin sudo audio video render input dialout netdev plugdev; do
+    groupadd -r "$grp" 2>/dev/null || true
+done
+
+# Create user 'revoltos' with passwordless sudo and autologin
+if ! id -u revoltos >/dev/null 2>&1; then
+    useradd -m -s /bin/bash -u 1000 -G sudo,audio,video,render,input,seat,autologin,revoltos-user,netdev,plugdev revoltos 2>/dev/null || true
 fi
 
-# Enable necessary services
-systemctl enable NetworkManager.service || true
-systemctl enable pipewire.socket || true
-systemctl enable pipewire-pulse.socket || true
-systemctl enable wireplumber.service || true
+usermod -a -G autologin,sudo,audio,video,render,input,seat,netdev,plugdev revoltos 2>/dev/null || true
+
+# Set password to 'revoltos' and enable empty password for instant login
+echo "revoltos:revoltos" | chpasswd
+passwd -d revoltos 2>/dev/null || true
+
+# Root password set to 'root'
+echo "root:root" | chpasswd
+passwd -d root 2>/dev/null || true
+
+# Configure sudoers for passwordless execution
+mkdir -p /etc/sudoers.d
+cat > /etc/sudoers.d/live-nopasswd << 'EOF'
+%sudo ALL=(ALL:ALL) NOPASSWD: ALL
+revoltos ALL=(ALL:ALL) NOPASSWD: ALL
+EOF
+chmod 0440 /etc/sudoers.d/live-nopasswd
+
+# Enable PAM nullok for passwordless login
+if [ -f /etc/pam.d/common-auth ]; then
+    sed -i 's/pam_unix.so/pam_unix.so nullok/' /etc/pam.d/common-auth || true
+fi
+
+# PAM configuration for autologin
+mkdir -p /etc/pam.d
+cat > /etc/pam.d/lightdm-autologin << 'PAM'
+#%PAM-1.0
+auth requisite pam_nologin.so
+auth required pam_permit.so
+@include common-account
+session [success=ok ignore=ignore module_unknown=reset] pam_systemd.so
+session required pam_limits.so
+@include common-session
+@include common-password
+PAM
+
+# LightDM Autologin Configuration to start Hyprland
+if command -v lightdm >/dev/null 2>&1; then
+    mkdir -p /etc/lightdm/lightdm.conf.d
+    cat > /etc/lightdm/lightdm.conf.d/80-revoltos.conf << 'LIGHTDM'
+[Seat:*]
+autologin-user=revoltos
+autologin-user-timeout=0
+user-session=hyprland
+pam-autologin-service=lightdm-autologin
+LIGHTDM
+
+    systemctl enable lightdm.service 2>/dev/null || true
+fi
+
+# Ensure Wayland session desktop entry for Hyprland exists
+mkdir -p /usr/share/wayland-sessions
+cat > /usr/share/wayland-sessions/hyprland.desktop << 'DESKTOP'
+[Desktop Entry]
+Name=Hyprland (RevoltOS)
+Comment=RevoltOS Wayland Compositor
+Exec=Hyprland
+Type=Application
+DesktopNames=Hyprland;RevoltOS
+DESKTOP
+
+# Autostart Hyprland from TTY1 if no display manager is active
+mkdir -p /etc/skel
+cat >> /etc/skel/.bash_profile << 'BASH'
+if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    exec Hyprland
+fi
+BASH
+
+# Deploy skel to existing home
+if [ -d /home/revoltos ]; then
+    cp -a /etc/skel/. /home/revoltos/ 2>/dev/null || true
+    chown -R revoltos:revoltos /home/revoltos 2>/dev/null || true
+fi
+
+# Enable desktop services
+systemctl enable NetworkManager.service 2>/dev/null || true
+systemctl enable pipewire.socket 2>/dev/null || true
+systemctl enable pipewire-pulse.socket 2>/dev/null || true
+systemctl enable wireplumber.service 2>/dev/null || true
 
 # Update desktop icon and font caches
 if command -v update-icon-caches >/dev/null 2>&1; then
@@ -38,4 +117,3 @@ if command -v fc-cache >/dev/null 2>&1; then
 fi
 
 echo "[RevoltOS] Chroot hook execution complete."
-

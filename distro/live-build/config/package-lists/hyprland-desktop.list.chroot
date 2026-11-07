@@ -9,6 +9,9 @@ wayland-protocols
 xwayland
 seatd
 libinput10
+lightdm
+lightdm-gtk-greeter
+virtualbox-guest-utils
 waybar
 kitty
 thunar
