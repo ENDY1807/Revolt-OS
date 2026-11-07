@@ -100,3 +100,4 @@ This document details every foundational dependency in **RevoltOS**, verifying D
 - **License:** GPL-3.0+
 - **Debian Package:** `live-build`, `debootstrap`, `squashfs-tools`, `xorriso`
 - **Role:** Official Debian framework for assembling, customizing, and mastering ISO images.
+

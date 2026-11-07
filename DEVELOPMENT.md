@@ -92,3 +92,4 @@ sudo ./scripts/build-iso.sh --profile minimal
 ```bash
 ./scripts/run-qemu.sh build/revoltos-amd64.iso
 ```
+

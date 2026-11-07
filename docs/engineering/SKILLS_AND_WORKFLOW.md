@@ -70,3 +70,4 @@ Before declaring any implementation milestone complete:
 1. **Static Analysis & Syntax Validation:** All Shell, Python, QML, JSON, and C++ files must pass syntax verification (`bash -n`, `python -m py_compile`, `qmllint`, or schema checks).
 2. **Deterministic Configuration Check:** Base Debian package lists in `distro/live-build/config/package-lists/` must cross-reference actual Debian Stable repository pools.
 3. **Execution Verification:** No ISO creation or boot test will be claimed without execution artifacts and status codes logged in `docs/testing/`.
+

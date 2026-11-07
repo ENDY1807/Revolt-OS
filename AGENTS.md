@@ -43,3 +43,4 @@ This document governs the engineering standards, roles, and collaborative behavi
 
 - When an environment constraint is encountered (e.g. host running Windows without native Linux kernel namespaces for `live-build`), the agent must document the limitation transparently and provide automated scripts (`scripts/setup-build-env.sh`, `scripts/docker-build.sh`, `scripts/build-iso.sh`) to prepare the required Linux build environment.
 - Never claim an ISO was generated or tested unless verifiable image artifacts and test results are produced.
+

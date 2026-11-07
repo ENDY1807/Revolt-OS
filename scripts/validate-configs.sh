@@ -75,3 +75,4 @@ else
     echo "[-] Verification failed with $ERRORS error(s)."
     exit 1
 fi
+

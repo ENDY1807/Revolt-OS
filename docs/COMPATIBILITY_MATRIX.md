@@ -35,3 +35,4 @@ This document defines verified interoperability across hardware platforms, displ
 | **Display Configuration**| `wlr-randr` / Hyprland IPC | Unix Domain Socket (`$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock`) | Hyprland config reload |
 | **Package Management** | APT / dpkg / PackageKit | Polkit + D-Bus | Direct CLI APT invocation |
 | **Live Installer** | Calamares (Qt6) | Root D-Bus / Python Modules | Command-line `debootstrap` installer |
+

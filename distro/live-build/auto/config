@@ -16,7 +16,6 @@ lb config noauto \
     --apt-indices true \
     --apt-recommends true \
     --bootloader "grub-efi" \
-    --grub-theme "revoltos" \
     --iso-application "RevoltOS Desktop" \
     --iso-preparer "RevoltOS Engineering Team" \
     --iso-publisher "RevoltOS <https://revoltos.org>" \

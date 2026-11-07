@@ -1,0 +1,136 @@
+name: Build RevoltOS ISO
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Live ISO
+    runs-on: ubuntu-24.04
+    permissions: write-all
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Free Runner Disk Space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          df -h
+
+      - name: Install Build Toolchain & Debian Archive Keyring
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            debootstrap \
+            xorriso \
+            squashfs-tools \
+            grub-efi-amd64-bin \
+            grub-pc-bin \
+            mtools \
+            dosfstools \
+            isolinux \
+            syslinux-common \
+            syslinux-utils \
+            debian-archive-keyring \
+            ca-certificates \
+            curl \
+            wget \
+            coreutils \
+            jq \
+            live-build
+
+          # Ensure Debian Archive Keyring is present in standard locations
+          sudo mkdir -p /usr/share/keyrings
+          if [ ! -f /usr/share/keyrings/debian-archive-keyring.gpg ]; then
+            sudo curl -fsSL https://ftp-master.debian.org/keys/archive-key-12.asc | sudo gpg --dearmor -o /usr/share/keyrings/debian-archive-keyring.gpg || true
+          fi
+
+          echo "==> Tool versions:"
+          debootstrap --version || true
+          lb --version || true
+
+      - name: Configure Executable Permissions
+        run: |
+          chmod +x scripts/*.sh || true
+          chmod +x distro/live-build/auto/* || true
+          chmod +x distro/live-build/config/hooks/normal/* || true
+
+      - name: Validate Configurations
+        run: |
+          ./scripts/validate-configs.sh
+
+      - name: Build RevoltOS Live ISO
+        run: |
+          mkdir -p build
+          set -o pipefail
+          sudo ./scripts/build-iso.sh 2>&1 | tee build/build.log
+          sudo chown -R $USER:$USER build
+          sudo chmod -R a+rw build
+
+      - name: Print Build Logs Summary
+        if: always()
+        run: |
+          echo "=== BUILD LOG (LAST 250 LINES) ==="
+          tail -n 250 build/build.log 2>/dev/null || true
+          echo "=== DEBOOTSTRAP LOG (IF FAILED) ==="
+          sudo cat distro/live-build/chroot/debootstrap/debootstrap.log 2>/dev/null || true
+
+      - name: Export Build Log to build-logs branch
+        if: always()
+        run: |
+          mkdir -p /tmp/log-export
+          cp build/build.log /tmp/log-export/build.log 2>/dev/null || echo "No log found" > /tmp/log-export/build.log
+          cd /tmp/log-export
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b build-logs
+          git add build.log
+          git commit -m "chore: latest build log [skip ci]"
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push -f origin build-logs || true
+
+      - name: Verify ISO Image Integrity
+        if: hashFiles('build/*.iso') != ''
+        run: |
+          cd build
+          ls -lh *.iso
+          sha256sum *.iso > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Upload Build Log Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-build-log
+          path: |
+            build/build.log
+            distro/live-build/*.log
+          if-no-files-found: ignore
+
+      - name: Upload RevoltOS ISO Artifact
+        if: hashFiles('build/*.iso') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: RevoltOS-1.0-amd64-ISO
+          path: |
+            build/*.iso
+            build/*.sha256
+            build/SHA256SUMS.txt
+          retention-days: 14
+
+      - name: Publish GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/v') && hashFiles('build/*.iso') != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/*.iso
+            build/SHA256SUMS.txt
+          draft: false
+          prerelease: false

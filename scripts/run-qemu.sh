@@ -62,3 +62,4 @@ qemu-system-x86_64 \
     -device hda-duplex \
     -device usb-ehci \
     -device usb-tablet
+

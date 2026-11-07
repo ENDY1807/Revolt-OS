@@ -60,3 +60,4 @@ RevoltOS respects upstream open-source licenses and adheres strictly to attribut
 All original RevoltOS code (including **Revolt Island**, **Revolt AI `revoltd`**, **Revolt Settings**, **Revolt Store**, **Dev Environment Manager**, and **Revolt Game Hub**) is licensed under the:
 - **GNU General Public License Version 3 (GPL-3.0)** as published by the Free Software Foundation.
 - See `LICENSE` for the complete legal text.
+

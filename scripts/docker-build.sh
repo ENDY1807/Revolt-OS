@@ -56,3 +56,4 @@ docker run --rm --privileged \
     ./scripts/build-iso.sh
 
 echo "[+] Containerized build process completed."
+

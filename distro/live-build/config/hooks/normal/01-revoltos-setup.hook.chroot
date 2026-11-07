@@ -38,3 +38,4 @@ if command -v fc-cache >/dev/null 2>&1; then
 fi
 
 echo "[RevoltOS] Chroot hook execution complete."
+

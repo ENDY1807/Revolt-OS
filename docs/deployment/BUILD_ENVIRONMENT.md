@@ -66,3 +66,4 @@ The build pipeline consists of 4 reproducible stages implemented in `scripts/bui
 | - Compute SHA256 checksums                                                    |
 +-------------------------------------------------------------------------------+
 ```
+

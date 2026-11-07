@@ -43,3 +43,4 @@ RevoltOS includes an integrated hardware-detection daemon (`revoltos-profile-dae
 | **Revolt AI Mode** | Cloud-only streaming | Cloud + small Ollama models | Cloud + Local Ollama GPU offload |
 | **GameMode Governor** | `powersave` / `schedutil` | `ondemand` / `schedutil` | `performance` forced |
 | **Background Indexing** | Disabled when on battery | Throttled I/O | Full high-speed parallel indexing |
+

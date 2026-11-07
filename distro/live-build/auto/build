@@ -3,3 +3,4 @@ set -e
 
 # RevoltOS live-build auto-build
 lb build noauto "${@}"
+

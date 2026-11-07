@@ -88,3 +88,4 @@ else
     echo "[-] Error: lb build completed but no .iso output file was detected."
     exit 1
 fi
+
