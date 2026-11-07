@@ -1,4 +1,11 @@
 # RevoltOS Hyprland Desktop Environment
+hyprland
+hypridle
+hyprlock
+hyprpaper
+xdg-desktop-portal-hyprland
+xdg-desktop-portal
+wayland-protocols
 xwayland
 seatd
 libinput10
@@ -10,16 +17,14 @@ mako-notifier
 grim
 slurp
 wl-clipboard
-xdg-desktop-portal
-xdg-desktop-portal-wlr
+cliphist
 xdg-user-dirs
 xdg-utils
-fonts-inter
 fonts-font-awesome
+fonts-noto
 papirus-icon-theme
 breeze-cursor-theme
 libpam-systemd
 polkit-kde-agent-1
 playerctl
 brightnessctl
-

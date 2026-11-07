@@ -42,16 +42,32 @@ jobs:
             curl \
             wget \
             coreutils \
-            jq \
-            live-build
+            jq
 
-          # Ensure Debian Archive Keyring is present in standard locations
+          echo "==> Fetching latest official Debian keyring, debootstrap and live-build..."
+          curl -fsSL -o /tmp/debian-keyring.deb http://deb.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2025.1_all.deb || \
+          curl -fsSL -o /tmp/debian-keyring.deb http://deb.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2023.4_all.deb || true
+          if [ -f /tmp/debian-keyring.deb ]; then
+            sudo dpkg -i --force-overwrite /tmp/debian-keyring.deb || true
+          fi
+
+          curl -fsSL -o /tmp/debootstrap.deb http://deb.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.145_all.deb || \
+          curl -fsSL -o /tmp/debootstrap.deb http://deb.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.141_all.deb || true
+          if [ -f /tmp/debootstrap.deb ]; then
+            sudo dpkg -i --force-overwrite /tmp/debootstrap.deb || true
+          fi
+
+          curl -fsSL -o /tmp/live-build.deb http://deb.debian.org/debian/pool/main/l/live-build/live-build_20250814_all.deb || \
+          curl -fsSL -o /tmp/live-build.deb http://deb.debian.org/debian/pool/main/l/live-build/live-build_20250505+deb13u1_all.deb || \
+          curl -fsSL -o /tmp/live-build.deb http://deb.debian.org/debian/pool/main/l/live-build/live-build_20230502_all.deb
+          sudo dpkg -i --force-overwrite /tmp/live-build.deb || sudo apt-get install -f -y
+
           sudo mkdir -p /usr/share/keyrings
           if [ ! -f /usr/share/keyrings/debian-archive-keyring.gpg ]; then
             sudo curl -fsSL https://ftp-master.debian.org/keys/archive-key-12.asc | sudo gpg --dearmor -o /usr/share/keyrings/debian-archive-keyring.gpg || true
           fi
 
-          echo "==> Tool versions:"
+          echo "==> Installed Tool Versions:"
           debootstrap --version || true
           lb --version || true
 

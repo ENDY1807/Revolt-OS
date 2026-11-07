@@ -1,25 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-# RevoltOS live-build auto-config
+# RevoltOS Debian Live ISO Configuration
 lb config noauto \
     --mode debian \
-    --system live \
-    --distribution bookworm \
+    --distribution sid \
     --architectures amd64 \
+    --binary-images iso-hybrid \
+    --bootloaders "grub-efi,syslinux" \
+    --bootappend-live "boot=live components username=revoltos hostname=revoltos quiet splash" \
+    --debian-installer false \
+    --initsystem systemd \
     --archive-areas "main contrib non-free non-free-firmware" \
     --mirror-bootstrap "http://deb.debian.org/debian" \
     --mirror-binary "http://deb.debian.org/debian" \
-    --security true \
-    --updates true \
-    --backports true \
-    --apt-indices true \
-    --apt-recommends true \
-    --bootloader "grub-efi" \
-    --iso-application "RevoltOS Desktop" \
-    --iso-preparer "RevoltOS Engineering Team" \
-    --iso-publisher "RevoltOS <https://revoltos.org>" \
-    --iso-volume "REVOLTOS_AMD64" \
-    --image-name "revoltos-amd64" \
+    --keyring-packages debian-archive-keyring \
+    --apt-recommends false \
+    --firmware-binary true \
+    --firmware-chroot true \
     --memtest none \
+    --iso-application "RevoltOS" \
+    --iso-volume "RevoltOS 1.0" \
+    --system live \
+    --linux-packages "linux-image" \
+    --linux-flavours "amd64" \
+    --security false \
     "${@}"

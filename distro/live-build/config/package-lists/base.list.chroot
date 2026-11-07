@@ -1,4 +1,4 @@
-# RevoltOS Base System Packages (Debian Stable)
+# RevoltOS Base System Packages (Debian)
 linux-image-amd64
 systemd
 systemd-sysv
@@ -17,7 +17,7 @@ pciutils
 usbutils
 lsof
 htop
-neofetch
+fastfetch
 polkitd
 libpolkit-gobject-1-0
 dbus
@@ -31,4 +31,3 @@ python3
 python3-pip
 python3-venv
 python3-apt
-
