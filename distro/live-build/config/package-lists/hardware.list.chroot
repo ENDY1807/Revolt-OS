@@ -1,0 +1,24 @@
+# RevoltOS Hardware & Driver Packages
+firmware-linux-free
+firmware-misc-nonfree
+intel-microcode
+amd64-microcode
+mesa-vulkan-drivers
+mesa-va-drivers
+intel-media-va-driver
+libgl1-mesa-dri
+libglx-mesa0
+libvulkan1
+vulkan-tools
+xserver-xorg-video-all
+udisks2
+upower
+bluez
+bluez-tools
+network-manager
+network-manager-gnome
+wpasupplicant
+rfkill
+acpi
+acpid
+lm-sensors

@@ -1,0 +1,11 @@
+# RevoltOS Multimedia & PipeWire Stack
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+pavucontrol
+alsa-utils
+libspa-0.2-bluetooth
+gstreamer1.0-pipewire
+mpv
+ffmpeg

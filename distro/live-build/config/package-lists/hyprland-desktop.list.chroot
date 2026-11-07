@@ -1,0 +1,24 @@
+# RevoltOS Hyprland Desktop Environment
+xwayland
+seatd
+libinput10
+waybar
+kitty
+thunar
+thunar-archive-plugin
+mako-notifier
+grim
+slurp
+wl-clipboard
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xdg-user-dirs
+xdg-utils
+fonts-inter
+fonts-font-awesome
+papirus-icon-theme
+breeze-cursor-theme
+libpam-systemd
+polkit-kde-agent-1
+playerctl
+brightnessctl

@@ -1,0 +1,68 @@
+/* ==============================================================================
+ * RevoltOS Official Rofi Theme
+ * ============================================================================== */
+
+* {
+    background-color: transparent;
+    text-color: #F5F3FF;
+    font: "Inter 11";
+}
+
+window {
+    transparency: "real";
+    background-color: rgba(8, 8, 23, 0.92);
+    border: 2px solid #8B35FF;
+    border-radius: 16px;
+    width: 640px;
+    padding: 20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 16px;
+}
+
+inputbar {
+    background-color: #15152B;
+    border: 1px solid #20203A;
+    border-radius: 10px;
+    padding: 10px 14px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: #B56BFF;
+    margin: 0px 8px 0px 0px;
+}
+
+entry {
+    placeholder: "Search applications, commands, or settings...";
+    placeholder-color: #9290AA;
+}
+
+listview {
+    lines: 7;
+    columns: 1;
+    spacing: 6px;
+    scrollbar: false;
+}
+
+element {
+    padding: 8px 12px;
+    border-radius: 8px;
+    children: [ element-icon, element-text ];
+    spacing: 12px;
+}
+
+element selected {
+    background-color: #8B35FF;
+    text-color: #FFFFFF;
+}
+
+element-icon {
+    size: 24px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}

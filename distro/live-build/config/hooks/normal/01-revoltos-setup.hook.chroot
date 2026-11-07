@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+echo "[RevoltOS] Running post-install chroot configuration hook..."
+
+# Set distribution hostname
+echo "revoltos" > /etc/hostname
+
+# Configure PAM & default locale
+if [ -f /etc/locale.gen ]; then
+    sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+    locale-gen || true
+fi
+
+# Set default shell to bash
+useradd -D -s /bin/bash
+
+# Ensure live user configuration is present
+if id "user" >/dev/null 2>&1; then
+    usermod -l revolt user || true
+    groupmod -n revolt user || true
+    usermod -d /home/revolt -m revolt || true
+fi
+
+# Enable necessary services
+systemctl enable NetworkManager.service || true
+systemctl enable pipewire.socket || true
+systemctl enable pipewire-pulse.socket || true
+systemctl enable wireplumber.service || true
+
+# Update desktop icon and font caches
+if command -v update-icon-caches >/dev/null 2>&1; then
+    update-icon-caches /usr/share/icons/* || true
+fi
+
+if command -v fc-cache >/dev/null 2>&1; then
+    fc-cache -fv || true
+fi
+
+echo "[RevoltOS] Chroot hook execution complete."

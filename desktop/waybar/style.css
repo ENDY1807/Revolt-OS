@@ -1,0 +1,93 @@
+/* ==============================================================================
+ * RevoltOS Official Waybar Stylesheet
+ * Palette: #8B35FF (Primary) | #B56BFF (Accent) | #080817 (Base) | #15152B (Surface)
+ * ============================================================================== */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Inter", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(8, 8, 23, 0.75);
+    border: 1px solid rgba(139, 53, 255, 0.25);
+    border-radius: 12px;
+    color: #F5F3FF;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+#custom-revolt-logo {
+    background-color: #8B35FF;
+    color: #F5F3FF;
+    font-weight: bold;
+    padding: 0 12px;
+    margin: 4px;
+    border-radius: 8px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #9290AA;
+    border-radius: 6px;
+    margin: 4px 2px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(181, 107, 255, 0.2);
+    color: #F5F3FF;
+}
+
+#workspaces button.active {
+    background: #8B35FF;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#window {
+    color: #9290AA;
+    padding: 0 12px;
+    font-style: italic;
+}
+
+#custom-island-spacer {
+    min-width: 220px;
+}
+
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#clock,
+#tray {
+    background: #15152B;
+    color: #F5F3FF;
+    padding: 2px 10px;
+    margin: 4px 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(139, 53, 255, 0.15);
+}
+
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#clock:hover {
+    background: #20203A;
+    border-color: #B56BFF;
+}
+
+#battery.warning {
+    color: #F59E0B;
+}
+
+#battery.critical {
+    background: #EF4444;
+    color: #FFFFFF;
+}

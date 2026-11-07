@@ -1,0 +1,12 @@
+NAME="RevoltOS"
+PRETTY_NAME="RevoltOS 1.0 (Revolution)"
+ID=revoltos
+ID_LIKE=debian
+VERSION="1.0 (Revolution)"
+VERSION_ID="1.0"
+VERSION_CODENAME=revolution
+HOME_URL="https://revoltos.org"
+SUPPORT_URL="https://revoltos.org/support"
+BUG_REPORT_URL="https://github.com/revoltos/revoltos/issues"
+ANSI_COLOR="1;35"
+LOGO=revoltos-logo
