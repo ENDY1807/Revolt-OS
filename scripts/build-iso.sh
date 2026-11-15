@@ -75,11 +75,9 @@ cp -r "$ROOT_DIR/revolt-island/." config/includes.chroot/usr/share/revoltos/revo
 cp -r "$ROOT_DIR/revolt-ai/." config/includes.chroot/usr/share/revoltos/revolt-ai/
 cp -r "$ROOT_DIR/applications/dev-environment/." config/includes.chroot/usr/share/revoltos/revolt-dev-environment/
 
-# Sync executable wrappers in /usr/local/bin
-if [ -d "$ROOT_DIR/distro/live-build/config/includes.chroot/usr/local/bin" ]; then
-    cp -r "$ROOT_DIR/distro/live-build/config/includes.chroot/usr/local/bin/." config/includes.chroot/usr/local/bin/
-    chmod +x config/includes.chroot/usr/local/bin/* 2>/dev/null || true
-fi
+# Ensure all scripts in /usr/local/bin and hooks are executable
+chmod +x config/includes.chroot/usr/local/bin/* 2>/dev/null || true
+chmod +x config/hooks/normal/* 2>/dev/null || true
 
 echo "[*] Executing Debian live build (lb build)... This will download base packages and assemble squashfs."
 lb build
