@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python3 /usr/share/revoltos/revolt-dev-environment/src/revolt_dev_cli.py "$@"

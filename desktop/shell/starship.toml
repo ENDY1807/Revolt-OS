@@ -1,0 +1,48 @@
+# RevoltOS Starship Prompt Configuration
+# High-speed developer shell prompt for Bash, Zsh, and Fish
+
+format = """
+[󰣇 RevoltOS](bold #8B35FF) $directory$git_branch$git_status$nodejs$rust$golang$python$cmd_duration
+$character"""
+
+[directory]
+style = "bold #B56BFF"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold #10B981"
+
+[git_status]
+style = "bold #EF4444"
+format = '([$all_status$ahead_behind]($style) )'
+
+[nodejs]
+symbol = " "
+style = "bold #10B981"
+format = "via [$symbol($version )]($style)"
+
+[rust]
+symbol = " "
+style = "bold #F59E0B"
+format = "via [$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "bold #06B6D4"
+format = "via [$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "bold #3B82F6"
+format = "via [${symbol}${pyenv_prefix}(${version} )]($style)"
+
+[cmd_duration]
+min_time = 2_000
+style = "bold #9290AA"
+format = "took [$duration]($style) "
+
+[character]
+success_symbol = "[❯](bold #8B35FF)"
+error_symbol = "[❯](bold #EF4444)"

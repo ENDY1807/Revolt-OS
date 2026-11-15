@@ -50,12 +50,16 @@ else
     lb config
 fi
 
-echo "[*] Injecting RevoltOS Desktop, Theme, and Island overlays into chroot..."
+echo "[*] Injecting RevoltOS Desktop, Theme, Dev Tooling, and Island overlays into chroot..."
 mkdir -p config/includes.chroot/etc/skel/.config/hypr
 mkdir -p config/includes.chroot/etc/skel/.config/waybar
 mkdir -p config/includes.chroot/etc/skel/.config/rofi
 mkdir -p config/includes.chroot/etc/skel/.config/mako
 mkdir -p config/includes.chroot/usr/share/revoltos/branding
+mkdir -p config/includes.chroot/usr/share/revoltos/revolt-island
+mkdir -p config/includes.chroot/usr/share/revoltos/revolt-ai
+mkdir -p config/includes.chroot/usr/share/revoltos/revolt-dev-environment
+mkdir -p config/includes.chroot/usr/local/bin
 
 # Sync Desktop configs
 cp "$ROOT_DIR/desktop/hyprland/hyprland.conf" config/includes.chroot/etc/skel/.config/hypr/
@@ -64,6 +68,18 @@ cp "$ROOT_DIR/desktop/waybar/style.css" config/includes.chroot/etc/skel/.config/
 cp "$ROOT_DIR/desktop/launcher/rofi-hyprland.rasi" config/includes.chroot/etc/skel/.config/rofi/revoltos.rasi
 cp "$ROOT_DIR/desktop/notifications/mako.conf" config/includes.chroot/etc/skel/.config/mako/config
 cp "$ROOT_DIR/branding/logo/revoltos-logo.svg" config/includes.chroot/usr/share/revoltos/branding/
+cp "$ROOT_DIR/desktop/shell/starship.toml" config/includes.chroot/etc/skel/.config/starship.toml 2>/dev/null || true
+
+# Sync Revolt Island, Revolt AI, and Developer Suite
+cp -r "$ROOT_DIR/revolt-island/." config/includes.chroot/usr/share/revoltos/revolt-island/
+cp -r "$ROOT_DIR/revolt-ai/." config/includes.chroot/usr/share/revoltos/revolt-ai/
+cp -r "$ROOT_DIR/applications/dev-environment/." config/includes.chroot/usr/share/revoltos/revolt-dev-environment/
+
+# Sync executable wrappers in /usr/local/bin
+if [ -d "$ROOT_DIR/distro/live-build/config/includes.chroot/usr/local/bin" ]; then
+    cp -r "$ROOT_DIR/distro/live-build/config/includes.chroot/usr/local/bin/." config/includes.chroot/usr/local/bin/
+    chmod +x config/includes.chroot/usr/local/bin/* 2>/dev/null || true
+fi
 
 echo "[*] Executing Debian live build (lb build)... This will download base packages and assemble squashfs."
 lb build
@@ -88,4 +104,3 @@ else
     echo "[-] Error: lb build completed but no .iso output file was detected."
     exit 1
 fi
-

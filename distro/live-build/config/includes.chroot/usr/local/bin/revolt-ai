@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python3 /usr/share/revoltos/revolt-ai/client/revolt_ai_cli.py "$@"
