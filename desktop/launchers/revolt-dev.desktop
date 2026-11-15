@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Revolt Dev Suite
+Comment=Developer CLI & Distrobox Environment Manager
+Exec=kitty -e revolt-dev doctor
+Icon=utilities-terminal
+Terminal=false
+Categories=Development;
+Keywords=Dev;Doctor;Container;Preset;
+StartupNotify=true

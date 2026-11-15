@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Revolt AI Daemon
+Exec=python3 -m revolt_ai.backend.server --daemon
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

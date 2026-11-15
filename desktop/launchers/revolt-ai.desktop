@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Revolt AI
+Comment=Local & Cloud Intelligent Coding Assistant
+Exec=revolt-ai
+Icon=/usr/share/revoltos/branding/revoltos-logo.svg
+Terminal=true
+Categories=Development;Utility;
+Keywords=AI;Assistant;Code;LLM;
+StartupNotify=true

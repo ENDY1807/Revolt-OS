@@ -62,43 +62,48 @@ session required pam_limits.so
 @include common-password
 PAM
 
-# LightDM Autologin Configuration to start Hyprland
+# LightDM Autologin Configuration to start XFCE Traditional Desktop
 if command -v lightdm >/dev/null 2>&1; then
     mkdir -p /etc/lightdm/lightdm.conf.d
     cat > /etc/lightdm/lightdm.conf.d/80-revoltos.conf << 'LIGHTDM'
 [Seat:*]
 autologin-user=revoltos
 autologin-user-timeout=0
-user-session=hyprland
+user-session=xfce
 pam-autologin-service=lightdm-autologin
 LIGHTDM
 
     systemctl enable lightdm.service 2>/dev/null || true
+    ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service 2>/dev/null || true
+    ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target 2>/dev/null || true
 fi
 
-# Ensure Wayland session desktop entry for Hyprland exists
-mkdir -p /usr/share/wayland-sessions
-cat > /usr/share/wayland-sessions/hyprland.desktop << 'DESKTOP'
-[Desktop Entry]
-Name=Hyprland (RevoltOS)
-Comment=RevoltOS Wayland Compositor
-Exec=Hyprland
-Type=Application
-DesktopNames=Hyprland;RevoltOS
-DESKTOP
+# Set default x-session-manager to XFCE
+if [ -f /usr/bin/xfce4-session ]; then
+    update-alternatives --set x-session-manager /usr/bin/xfce4-session 2>/dev/null || true
+fi
 
-# Autostart Hyprland from TTY1 if no display manager is active
+# Autostart XFCE Desktop from TTY1 if no display manager is active
 mkdir -p /etc/skel
 cat >> /etc/skel/.bash_profile << 'BASH'
-if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-    exec Hyprland
+if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    exec startx /usr/bin/xfce4-session 2>/dev/null || exec startxfce4
 fi
 BASH
+
+# Ensure Desktop launcher directory exists in skel
+mkdir -p /etc/skel/Desktop
+if [ -f /usr/share/applications/revolt-ai.desktop ]; then
+    cp /usr/share/applications/revolt-ai.desktop /etc/skel/Desktop/ 2>/dev/null || true
+fi
+if [ -f /usr/share/applications/revolt-dev.desktop ]; then
+    cp /usr/share/applications/revolt-dev.desktop /etc/skel/Desktop/ 2>/dev/null || true
+fi
+chmod +x /etc/skel/Desktop/*.desktop 2>/dev/null || true
 
 # Deploy skel to existing home
 if [ -d /home/revoltos ]; then
     cp -a /etc/skel/. /home/revoltos/ 2>/dev/null || true
-    rm -f /home/revoltos/.config/hypr/hyprland.lua 2>/dev/null || true
     chown -R revoltos:revoltos /home/revoltos 2>/dev/null || true
 fi
 

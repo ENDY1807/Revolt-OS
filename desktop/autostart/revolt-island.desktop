@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Revolt Island
+Exec=python3 /usr/share/revoltos/revolt-island/main.py
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

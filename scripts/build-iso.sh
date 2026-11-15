@@ -51,6 +51,10 @@ else
 fi
 
 echo "[*] Injecting RevoltOS Desktop, Theme, Dev Tooling, and Island overlays into chroot..."
+mkdir -p config/includes.chroot/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
+mkdir -p config/includes.chroot/etc/skel/.config/xfce4/panel
+mkdir -p config/includes.chroot/etc/skel/.config/autostart
+mkdir -p config/includes.chroot/etc/skel/Desktop
 mkdir -p config/includes.chroot/etc/skel/.config/hypr
 mkdir -p config/includes.chroot/etc/skel/.config/waybar
 mkdir -p config/includes.chroot/etc/skel/.config/rofi
@@ -59,15 +63,26 @@ mkdir -p config/includes.chroot/usr/share/revoltos/branding
 mkdir -p config/includes.chroot/usr/share/revoltos/revolt-island
 mkdir -p config/includes.chroot/usr/share/revoltos/revolt-ai
 mkdir -p config/includes.chroot/usr/share/revoltos/revolt-dev-environment
+mkdir -p config/includes.chroot/usr/share/applications
 mkdir -p config/includes.chroot/usr/local/bin
 
-# Sync Desktop configs
-cp "$ROOT_DIR/desktop/hyprland/hyprland.conf" config/includes.chroot/etc/skel/.config/hypr/
-cp "$ROOT_DIR/desktop/waybar/config.jsonc" config/includes.chroot/etc/skel/.config/waybar/
-cp "$ROOT_DIR/desktop/waybar/style.css" config/includes.chroot/etc/skel/.config/waybar/
-cp "$ROOT_DIR/desktop/launcher/rofi-hyprland.rasi" config/includes.chroot/etc/skel/.config/rofi/revoltos.rasi
-cp "$ROOT_DIR/desktop/notifications/mako.conf" config/includes.chroot/etc/skel/.config/mako/config
+# Sync XFCE Traditional Desktop (Zorin/Fedora style)
+cp -r "$ROOT_DIR/desktop/xfce4/xfconf/xfce-perchannel-xml/." config/includes.chroot/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/
+cp -r "$ROOT_DIR/desktop/xfce4/panel/." config/includes.chroot/etc/skel/.config/xfce4/panel/
+cp -r "$ROOT_DIR/desktop/autostart/." config/includes.chroot/etc/skel/.config/autostart/
+cp "$ROOT_DIR/desktop/launchers/"*.desktop config/includes.chroot/usr/share/applications/ 2>/dev/null || true
+cp "$ROOT_DIR/desktop/launchers/"*.desktop config/includes.chroot/etc/skel/Desktop/ 2>/dev/null || true
+
+# Sync Wayland/Hyprland configs (as alternate session)
+cp "$ROOT_DIR/desktop/hyprland/hyprland.conf" config/includes.chroot/etc/skel/.config/hypr/ 2>/dev/null || true
+cp "$ROOT_DIR/desktop/waybar/config.jsonc" config/includes.chroot/etc/skel/.config/waybar/ 2>/dev/null || true
+cp "$ROOT_DIR/desktop/waybar/style.css" config/includes.chroot/etc/skel/.config/waybar/ 2>/dev/null || true
+cp "$ROOT_DIR/desktop/launcher/rofi-hyprland.rasi" config/includes.chroot/etc/skel/.config/rofi/revoltos.rasi 2>/dev/null || true
+cp "$ROOT_DIR/desktop/notifications/mako.conf" config/includes.chroot/etc/skel/.config/mako/config 2>/dev/null || true
+
+# Sync Branding & Wallpaper
 cp "$ROOT_DIR/branding/logo/revoltos-logo.svg" config/includes.chroot/usr/share/revoltos/branding/
+cp "$ROOT_DIR/branding/wallpaper/revoltos-wallpaper.svg" config/includes.chroot/usr/share/revoltos/branding/
 cp "$ROOT_DIR/desktop/shell/starship.toml" config/includes.chroot/etc/skel/.config/starship.toml 2>/dev/null || true
 
 # Sync Revolt Island, Revolt AI, and Developer Suite

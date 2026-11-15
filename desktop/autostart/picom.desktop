@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Picom Compositor
+Exec=picom -b --vsync
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
