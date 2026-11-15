@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" width="3840" height="2160">
+  <defs>
+    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080B16" />
+      <stop offset="50%" stop-color="#191336" />
+      <stop offset="100%" stop-color="#05060d" />
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#flowGrad)" />
+  <g fill="none" stroke="#8B5CF6" stroke-width="2" stroke-opacity="0.25">
+    <path d="M 0,600 C 600,800 1200,400 1800,700 C 2400,1000 3000,500 3840,800" />
+    <path d="M 0,750 C 600,950 1200,550 1800,850 C 2400,1150 3000,650 3840,950" />
+    <path d="M 0,900 C 600,1100 1200,700 1800,1000 C 2400,1300 3000,800 3840,1100" />
+    <path d="M 0,1050 C 600,1250 1200,850 1800,1150 C 2400,1450 3000,950 3840,1250" />
+  </g>
+</svg>

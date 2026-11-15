@@ -1,7 +1,7 @@
-favorites=kitty.desktop,thunar.desktop,revolt-ai.desktop,revolt-dev.desktop
+favorites=kitty.desktop,thunar.desktop,revolt-ai.desktop,revolt-store.desktop,revolt-settings.desktop,revolt-dev.desktop
 recent=
 button-title=RevoltOS
-button-icon=/usr/share/revoltos/branding/revoltos-logo.svg
+button-icon=/usr/share/revoltos/branding/logo/variants/revoltos-symbol-r.svg
 show-button-title=true
 show-button-icon=true
 launcher-show-name=true

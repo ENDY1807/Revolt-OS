@@ -1,0 +1,44 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Inter", "JetBrains Mono", sans-serif;
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(17, 22, 37, 0.85);
+    border: 1.5px solid rgba(139, 92, 246, 0.4);
+    border-radius: 22px;
+    color: #F8FAFC;
+    box-shadow: 0 8px 32px rgba(8, 11, 22, 0.6);
+}
+
+#custom-revolt-menu,
+#custom-files,
+#custom-browser,
+#custom-terminal,
+#custom-editor,
+#custom-music,
+#custom-discord,
+#custom-steam,
+#custom-appgrid {
+    padding: 6px 12px;
+    margin: 4px 2px;
+    border-radius: 12px;
+    background: transparent;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#custom-revolt-menu:hover,
+#custom-files:hover,
+#custom-browser:hover,
+#custom-terminal:hover,
+#custom-editor:hover,
+#custom-music:hover,
+#custom-discord:hover,
+#custom-steam:hover,
+#custom-appgrid:hover {
+    background: rgba(139, 92, 246, 0.25);
+    color: #C4B5FD;
+}

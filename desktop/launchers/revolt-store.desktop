@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Revolt Store
+Comment=Discover & Install Developer Tools & Linux Apps
+Exec=python3 -c "import sys, os; from PyQt6.QtCore import QUrl; from PyQt6.QtGui import QGuiApplication; from PyQt6.QtQml import QQmlApplicationEngine; app = QGuiApplication(sys.argv); engine = QQmlApplicationEngine(); engine.load(QUrl.fromLocalFile('/usr/share/revoltos/applications/store/Store.qml')); sys.exit(app.exec())"
+Icon=system-software-install
+Terminal=false
+Categories=System;PackageManager;
+StartupNotify=true

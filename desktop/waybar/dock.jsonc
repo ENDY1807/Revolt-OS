@@ -1,0 +1,63 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 52,
+    "margin-bottom": 12,
+    "spacing": 8,
+    "modules-center": [
+        "custom/revolt-menu",
+        "custom/files",
+        "custom/browser",
+        "custom/terminal",
+        "custom/editor",
+        "custom/music",
+        "custom/discord",
+        "custom/steam",
+        "custom/appgrid"
+    ],
+    "custom/revolt-menu": {
+        "format": " 󰚩 ",
+        "tooltip-format": "RevoltOS Menu",
+        "on-click": "rofi -show drun"
+    },
+    "custom/files": {
+        "format": " 📁 ",
+        "tooltip-format": "File Manager (Thunar)",
+        "on-click": "thunar"
+    },
+    "custom/browser": {
+        "format": " 🌐 ",
+        "tooltip-format": "Web Browser",
+        "on-click": "firefox || chromium"
+    },
+    "custom/terminal": {
+        "format": " 💻 ",
+        "tooltip-format": "Developer Terminal (Kitty)",
+        "on-click": "kitty"
+    },
+    "custom/editor": {
+        "format": " 📝 ",
+        "tooltip-format": "Code Editor",
+        "on-click": "code || mousepad"
+    },
+    "custom/music": {
+        "format": " 🎵 ",
+        "tooltip-format": "Music & Audio",
+        "on-click": "spotify || pavucontrol"
+    },
+    "custom/discord": {
+        "format": " 💬 ",
+        "tooltip-format": "Discord Community",
+        "on-click": "discord"
+    },
+    "custom/steam": {
+        "format": " 🎮 ",
+        "tooltip-format": "Gaming Center (Steam / Proton)",
+        "on-click": "steam"
+    },
+    "custom/appgrid": {
+        "format": " 󰕰 ",
+        "tooltip-format": "All Applications",
+        "on-click": "rofi -show drun"
+    }
+}

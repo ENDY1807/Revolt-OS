@@ -1,40 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <linearGradient id="revoltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#B56BFF" />
-      <stop offset="100%" stop-color="#8B35FF" />
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#15152B" />
-      <stop offset="100%" stop-color="#080817" />
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="12" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-
-  <!-- Background Shield Canvas -->
-  <rect width="512" height="512" rx="108" fill="url(#bgGrad)" stroke="#8B35FF" stroke-width="8" stroke-opacity="0.3" />
-
-  <!-- Outer Ambient Aura -->
-  <circle cx="256" cy="256" r="180" fill="#8B35FF" opacity="0.08" filter="url(#glow)" />
-
-  <!-- Geometric Revolt 'R' Monogram -->
-  <g filter="url(#glow)">
-    <!-- Vertical Spine (Speed & Strength) -->
-    <path d="M 148 116 L 212 116 L 212 396 L 148 396 Z" fill="url(#revoltGrad)" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <rect width="100%" height="100%" fill="transparent" />
+  <g transform="translate(20, 0)">
     
-    <!-- Upper Geometric Loop (Innovation & Completeness) -->
-    <path d="M 212 116 L 312 116 C 376 116 396 156 396 216 C 396 276 364 296 296 296 L 212 296 Z" 
-          fill="none" stroke="url(#revoltGrad)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" />
+    <defs>
+      <linearGradient id="pri_top" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#C4B5FD" />
+        <stop offset="100%" stop-color="#A78BFA" />
+      </linearGradient>
+      <linearGradient id="pri_stem" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#A78BFA" />
+        <stop offset="100%" stop-color="#6D28D9" />
+      </linearGradient>
+      <linearGradient id="pri_loop" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#C4B5FD" />
+        <stop offset="100%" stop-color="#8B5CF6" />
+      </linearGradient>
+      <linearGradient id="pri_leg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#A78BFA" />
+        <stop offset="100%" stop-color="#6D28D9" />
+      </linearGradient>
+      <filter id="pri_glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="8" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
 
-    <!-- Forward Dynamic Kinetic Leg (Freedom & Velocity) -->
-    <path d="M 272 276 L 388 396" 
-          stroke="#B56BFF" stroke-width="52" stroke-linecap="round" />
+    <!-- Faceted Modern 'R' Geometry -->
+    <g stroke="none" stroke-width="0" stroke-linejoin="round">
+      <!-- Left Stem -->
+      <polygon points="40,30 90,30 90,210 40,210" fill="url(#pri_stem)" />
+      
+      <!-- Top Arc/Loop Outer -->
+      <path d="M 90,30 L 160,30 C 195,30 220,55 220,88 C 220,120 195,142 160,142 L 90,142 Z" fill="url(#pri_loop)" />
+      
+      <!-- Loop Inner Cutout (Dark Surface) -->
+      <path d="M 90,65 L 145,65 C 165,65 178,75 178,88 C 178,102 165,110 145,110 L 90,110 Z" fill="#080B16" />
 
-    <!-- Core Focal Spark (Independence) -->
-    <polygon points="212,236 260,236 236,276 284,276 220,348 232,288 196,288" fill="#F5F3FF" opacity="0.95" />
+      <!-- Diagonal Dynamic Leg -->
+      <polygon points="120,132 170,132 230,210 175,210" fill="url(#pri_leg)" />
+
+      <!-- Top Left Facet Chamfer / Glow Highlight -->
+      <polygon points="35,30 65,10 90,30 40,30" fill="url(#pri_top)" />
+
+      <!-- Sparkle Star at Top Crest -->
+      <g transform="translate(68, 22) scale(0.85)">
+        <path d="M 0,-16 Q 0,0 16,0 Q 0,0 0,16 Q 0,0 -16,0 Q 0,0 0,-16 Z" fill="#FFFFFF" filter="url(#pri_glow)" />
+      </g>
+    </g>
+  
+    <text x="260" y="130" font-family="'Inter', -apple-system, sans-serif" font-size="78" font-weight="900" letter-spacing="-1" fill="#F8FAFC">
+      Revolt<tspan fill="#8B5CF6">OS</tspan>
+    </text>
+    <text x="265" y="175" font-family="'Inter', -apple-system, sans-serif" font-size="24" font-weight="500" letter-spacing="8" fill="#A78BFA">
+      BEYOND LIMITS.
+    </text>
   </g>
 </svg>
-

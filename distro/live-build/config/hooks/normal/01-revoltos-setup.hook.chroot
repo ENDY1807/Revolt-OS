@@ -93,12 +93,7 @@ BASH
 
 # Ensure Desktop launcher directory exists in skel
 mkdir -p /etc/skel/Desktop
-if [ -f /usr/share/applications/revolt-ai.desktop ]; then
-    cp /usr/share/applications/revolt-ai.desktop /etc/skel/Desktop/ 2>/dev/null || true
-fi
-if [ -f /usr/share/applications/revolt-dev.desktop ]; then
-    cp /usr/share/applications/revolt-dev.desktop /etc/skel/Desktop/ 2>/dev/null || true
-fi
+cp /usr/share/applications/revolt-*.desktop /etc/skel/Desktop/ 2>/dev/null || true
 chmod +x /etc/skel/Desktop/*.desktop 2>/dev/null || true
 
 # Deploy skel to existing home

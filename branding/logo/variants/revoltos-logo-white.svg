@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <g transform="translate(20, 0)">
+    
+    <defs>
+      <linearGradient id="wh_top" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" />
+        <stop offset="100%" stop-color="#F1F5F9" />
+      </linearGradient>
+      <linearGradient id="wh_stem" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#F1F5F9" />
+        <stop offset="100%" stop-color="#CBD5E1" />
+      </linearGradient>
+      <linearGradient id="wh_loop" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" />
+        <stop offset="100%" stop-color="#E2E8F0" />
+      </linearGradient>
+      <linearGradient id="wh_leg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F1F5F9" />
+        <stop offset="100%" stop-color="#CBD5E1" />
+      </linearGradient>
+      <filter id="wh_glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="8" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+
+    <!-- Faceted Modern 'R' Geometry -->
+    <g stroke="none" stroke-width="0" stroke-linejoin="round">
+      <!-- Left Stem -->
+      <polygon points="40,30 90,30 90,210 40,210" fill="url(#wh_stem)" />
+      
+      <!-- Top Arc/Loop Outer -->
+      <path d="M 90,30 L 160,30 C 195,30 220,55 220,88 C 220,120 195,142 160,142 L 90,142 Z" fill="url(#wh_loop)" />
+      
+      <!-- Loop Inner Cutout (Dark Surface) -->
+      <path d="M 90,65 L 145,65 C 165,65 178,75 178,88 C 178,102 165,110 145,110 L 90,110 Z" fill="#080B16" />
+
+      <!-- Diagonal Dynamic Leg -->
+      <polygon points="120,132 170,132 230,210 175,210" fill="url(#wh_leg)" />
+
+      <!-- Top Left Facet Chamfer / Glow Highlight -->
+      <polygon points="35,30 65,10 90,30 40,30" fill="url(#wh_top)" />
+
+      <!-- Sparkle Star at Top Crest -->
+      <g transform="translate(68, 22) scale(0.85)">
+        <path d="M 0,-16 Q 0,0 16,0 Q 0,0 0,16 Q 0,0 -16,0 Q 0,0 0,-16 Z" fill="#FFFFFF" filter="url(#wh_glow)" />
+      </g>
+    </g>
+  
+    <text x="260" y="130" font-family="'Inter', sans-serif" font-size="78" font-weight="900" fill="#FFFFFF">
+      RevoltOS
+    </text>
+    <text x="265" y="175" font-family="'Inter', sans-serif" font-size="24" font-weight="500" letter-spacing="8" fill="#E2E8F0">
+      BEYOND LIMITS.
+    </text>
+  </g>
+</svg>

@@ -75,20 +75,18 @@ cp "$ROOT_DIR/desktop/launchers/"*.desktop config/includes.chroot/etc/skel/Deskt
 
 # Sync Wayland/Hyprland configs (as alternate session)
 cp "$ROOT_DIR/desktop/hyprland/hyprland.conf" config/includes.chroot/etc/skel/.config/hypr/ 2>/dev/null || true
-cp "$ROOT_DIR/desktop/waybar/config.jsonc" config/includes.chroot/etc/skel/.config/waybar/ 2>/dev/null || true
-cp "$ROOT_DIR/desktop/waybar/style.css" config/includes.chroot/etc/skel/.config/waybar/ 2>/dev/null || true
+cp -r "$ROOT_DIR/desktop/waybar/." config/includes.chroot/etc/skel/.config/waybar/ 2>/dev/null || true
 cp "$ROOT_DIR/desktop/launcher/rofi-hyprland.rasi" config/includes.chroot/etc/skel/.config/rofi/revoltos.rasi 2>/dev/null || true
 cp "$ROOT_DIR/desktop/notifications/mako.conf" config/includes.chroot/etc/skel/.config/mako/config 2>/dev/null || true
 
 # Sync Branding & Wallpaper
-cp "$ROOT_DIR/branding/logo/revoltos-logo.svg" config/includes.chroot/usr/share/revoltos/branding/
-cp "$ROOT_DIR/branding/wallpaper/revoltos-wallpaper.svg" config/includes.chroot/usr/share/revoltos/branding/
+cp -r "$ROOT_DIR/branding/." config/includes.chroot/usr/share/revoltos/branding/
 cp "$ROOT_DIR/desktop/shell/starship.toml" config/includes.chroot/etc/skel/.config/starship.toml 2>/dev/null || true
 
-# Sync Revolt Island, Revolt AI, and Developer Suite
+# Sync Revolt Island, Revolt AI, Developer Suite, and System Applications
 cp -r "$ROOT_DIR/revolt-island/." config/includes.chroot/usr/share/revoltos/revolt-island/
 cp -r "$ROOT_DIR/revolt-ai/." config/includes.chroot/usr/share/revoltos/revolt-ai/
-cp -r "$ROOT_DIR/applications/dev-environment/." config/includes.chroot/usr/share/revoltos/revolt-dev-environment/
+cp -r "$ROOT_DIR/applications/." config/includes.chroot/usr/share/revoltos/applications/
 
 # Ensure all scripts in /usr/local/bin and hooks are executable
 chmod +x config/includes.chroot/usr/local/bin/* 2>/dev/null || true

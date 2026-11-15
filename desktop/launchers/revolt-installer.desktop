@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Install RevoltOS
+Comment=Install RevoltOS to hard drive
+Exec=python3 /usr/share/revoltos/applications/installer/installer_gui.py
+Icon=/usr/share/revoltos/branding/logo/variants/revoltos-installer.svg
+Terminal=false
+Categories=System;
+StartupNotify=true
