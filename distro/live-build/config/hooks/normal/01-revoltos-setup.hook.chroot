@@ -98,6 +98,7 @@ BASH
 # Deploy skel to existing home
 if [ -d /home/revoltos ]; then
     cp -a /etc/skel/. /home/revoltos/ 2>/dev/null || true
+    rm -f /home/revoltos/.config/hypr/hyprland.lua 2>/dev/null || true
     chown -R revoltos:revoltos /home/revoltos 2>/dev/null || true
 fi
 
